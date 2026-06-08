@@ -1,0 +1,6 @@
+{
+  "name": "Daliaxez Linktree",
+  "description": "A premium, iridescent, and futuristic directory page for the content creator Daliaxez, complete with interactive deadpan broken-english translators, community slang glossaries, and mechanical HUD widgets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

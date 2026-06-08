@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --animate-fade-in-up: fade-in-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 0.4s ease forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  --animate-section-glitch: section-glitch 0.45s cubic-bezier(.25,.46,.45,.94) both;
+
+  @keyframes section-glitch {
+    0%, 100% {
+      transform: translate(0, 0) skew(0deg);
+      filter: hue-rotate(0deg) saturate(100%);
+    }
+    10% {
+      transform: translate(-3px, 1.5px) skew(-1.5deg);
+      filter: hue-rotate(15deg) saturate(110%);
+    }
+    30% {
+      transform: translate(3px, -2px) skew(1deg);
+      filter: hue-rotate(-15deg) saturate(120%);
+    }
+    50% {
+      transform: translate(-1.5px, 2px) skew(0deg);
+    }
+    75% {
+      transform: translate(1.5px, -1.5px) skew(1deg);
+      filter: hue-rotate(8deg);
+    }
+    90% {
+      transform: translate(-1px, 1px) skew(-0.5deg);
+    }
+  }
+}
+
+.glitch-shake {
+  animation: var(--animate-section-glitch);
+}
+
+/* Custom global styles for the premium cybernetic design */
+html, body {
+  background-color: #030303;
+  color: #f4f4f5;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: rgba(244, 114, 182, 0.3);
+  color: #ffffff;
+}
+
+/* Subtle holographic grain overlay to represent Image 2 */
+.hologram-grain {
+  background-image: radial-gradient(rgba(244, 114, 182, 0.15) 1px, transparent 0),
+                    radial-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
