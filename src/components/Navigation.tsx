@@ -13,12 +13,32 @@ export const Navigation: React.FC<NavigationProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", proposal: "" });
 
   const handleCollab = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email) return;
+
+    setIsSubmitting(true);
+
+    const subject = encodeURIComponent(`collaboration proposal / ${form.name}`);
+    const body = encodeURIComponent(
+      `Hello Creator,\n\n` +
+      `You received a new collaboration proposal from your directory portfolio.\n\n` +
+      `--------------------------------------\n` +
+      `Brand/Agency: ${form.name}\n` +
+      `Signal Frequency (Email): ${form.email}\n` +
+      `--------------------------------------\n\n` +
+      `Proposal context:\n${form.proposal}\n\n` +
+      `---\nTransmitted via daliaxez directory`
+    );
+    
+    // Direct pre-built mailto trigger targeting the target developer email
+    window.location.href = `mailto:contactdaliaxez@gmail.com?subject=${subject}&body=${body}`;
+    
     setSubmitted(true);
+    setIsSubmitting(false);
     setTimeout(() => {
       setSubmitted(false);
       setIsOpen(false);
@@ -110,10 +130,11 @@ export const Navigation: React.FC<NavigationProps> = ({
                   <input
                     type="text"
                     required
+                    disabled={isSubmitting}
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="e.g. Snail Entertainment"
-                    className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-fuchsia-500 font-sans"
+                    className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-fuchsia-500 font-sans disabled:opacity-50"
                   />
                 </div>
 
@@ -122,10 +143,11 @@ export const Navigation: React.FC<NavigationProps> = ({
                   <input
                     type="email"
                     required
+                    disabled={isSubmitting}
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="e.g. snail@warthunder.com"
-                    className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-fuchsia-500 font-sans"
+                    className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-fuchsia-500 font-sans disabled:opacity-50"
                   />
                 </div>
 
@@ -133,10 +155,11 @@ export const Navigation: React.FC<NavigationProps> = ({
                   <label className="font-mono text-[10px] text-zinc-400 block uppercase">Proposal context (all lowercase preferred)</label>
                   <textarea
                     rows={3}
+                    disabled={isSubmitting}
                     value={form.proposal}
                     onChange={(e) => setForm({ ...form, proposal: e.target.value })}
                     placeholder="e.g. we want to promote our new tank steering wheel with premium deadpan hashtags"
-                    className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-fuchsia-500 font-sans resize-none"
+                    className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-fuchsia-500 font-sans resize-none disabled:opacity-50"
                   />
                 </div>
 
@@ -149,10 +172,11 @@ export const Navigation: React.FC<NavigationProps> = ({
 
                 <button
                   type="submit"
-                  className="w-full bg-white hover:bg-zinc-200 text-black font-semibold rounded-xl py-3 text-sm flex items-center justify-center gap-2 shadow-lg transition-colors duration-200 active:scale-95 cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full bg-white hover:bg-zinc-200 text-black font-semibold rounded-xl py-3 text-sm flex items-center justify-center gap-2 shadow-lg transition-colors duration-200 active:scale-95 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="h-4 w-4" />
-                  Transmit Proposal Signal
+                  <Send className={`h-4 w-4 ${isSubmitting ? "animate-pulse" : ""}`} />
+                  {isSubmitting ? "Broadcasting Signal..." : "Transmit Proposal Signal"}
                 </button>
               </form>
             )}

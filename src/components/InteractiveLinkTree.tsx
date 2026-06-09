@@ -192,7 +192,7 @@ export const InteractiveLinkTree: React.FC<InteractiveLinkTreeProps> = ({ ecoMod
 
         {/* 4. Discord Panel (Now rendered below them, spanning all 3 columns with custom short horizontal styling) */}
         <a
-          href="https://discord.gg/daliaxez"
+          href="https://discord.gg/ADmqUYqWxW"
           target="_blank"
           rel="noopener noreferrer"
           onMouseEnter={() => setHoveredId("discord")}
