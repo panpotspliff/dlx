@@ -29,7 +29,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-40 bg-zinc-950/20 backdrop-blur-md border-b border-white/5 px-6 py-4 transition-all duration-300">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="max-w-7xl mx-auto flex items-center justify-between relative">
           
           {/* Left: Creator's Logo */}
           <div className="flex items-center gap-3 select-none">
@@ -39,28 +39,9 @@ export const Navigation: React.FC<NavigationProps> = ({
             </span>
           </div>
 
-          {/* Center: Subtle Navigation Links */}
-          <div className="hidden sm:flex items-center gap-8 font-mono text-xs text-zinc-400 font-medium">
-            <a
-              href="#about"
-              className="hover:text-white transition-colors tracking-wide hover:underline decoration-fuchsia-500 underline-offset-4"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("about-section")?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              ABOUT
-            </a>
-            <a
-              href="#links"
-              className="hover:text-white transition-colors tracking-wide hover:underline decoration-fuchsia-500 underline-offset-4"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("links-section")?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              CHANNELS
-            </a>
+          {/* Center: Non-interactable directory label (realigned & perfectly centered) */}
+          <div className="hidden sm:block absolute left-1/2 -translate-x-1/2 transform font-mono text-xs text-zinc-500 font-medium tracking-widest select-none pointer-events-none">
+            // directory
           </div>
 
           {/* Right: Pill CTA and Eco Mode Toggle */}
@@ -68,7 +49,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             <button
               onClick={() => onEcoModeToggle(!ecoMode)}
               title="Toggle low-latency Eco Mode (disables heavy animations)"
-              className={`flex items-center gap-1.5 rounded-full px-2.5 sm:px-3 py-1.5 sm:py-2 border transition-all duration-300 font-mono text-[9px] sm:text-[10px] font-bold tracking-wider cursor-pointer uppercase select-none ${
+              className={`hidden lg:flex items-center gap-1.5 rounded-full px-2.5 sm:px-3 py-1.5 sm:py-2 border transition-all duration-300 font-mono text-[9px] sm:text-[10px] font-bold tracking-wider cursor-pointer uppercase select-none ${
                 ecoMode
                   ? "bg-emerald-950/40 border-emerald-500/40 text-emerald-400 font-bold shadow-[0_0_8px_rgba(16,185,129,0.2)]"
                   : "bg-white/5 border-white/5 text-zinc-400 hover:text-white hover:bg-white/10"
